@@ -10,7 +10,9 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
     String tag = MainActivity.class.getSimpleName();
     CreateLottery createLottery = new CreateLottery();
-    TextView g0,g1,g2,g3,g4,g5;
+//    TextView g0,g1,g2,g3,g4,g5;
+    int lotNumberLen = 6;
+    TextView[] lotNumber = new TextView[lotNumberLen];
     Button b0;
 
     @Override
@@ -21,27 +23,28 @@ public class MainActivity extends AppCompatActivity {
         b0.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Integer[] lotteryNum = createLottery.createLottery();
-                g0.setText(lotteryNum[0].toString());
-                g1.setText(lotteryNum[1].toString());
-                g2.setText(lotteryNum[2].toString());
-                g3.setText(lotteryNum[3].toString());
-                g4.setText(lotteryNum[4].toString());
-                g5.setText(lotteryNum[5].toString());
-                for(int i=0; i<lotteryNum.length;i++){
-                    Log.d(tag, "The lottery num " + lotteryNum[i]);
+                int i=0;
+                Integer[] getLotteryNum = createLottery.createLottery();
+                for(Integer lotNum:getLotteryNum){
+                    lotNumber[i++].setText(lotNum.toString());
                 }
+
+
+//                for(Integer lotNum:lotteryNum){
+//                    Log.d(tag, "The lottery num " + lotNum);
+//                }
+
             }
         });
     }
 
     public void setViewId(){
-        g0 = findViewById(R.id.num0);
-        g1 = findViewById(R.id.num1);
-        g2 = findViewById(R.id.num2);
-        g3 = findViewById(R.id.num3);
-        g4 = findViewById(R.id.num4);
-        g5 = findViewById(R.id.num5);
+        lotNumber[0] = findViewById(R.id.num0);
+        lotNumber[1] = findViewById(R.id.num1);
+        lotNumber[2] = findViewById(R.id.num2);
+        lotNumber[3] = findViewById(R.id.num3);
+        lotNumber[4] = findViewById(R.id.num4);
+        lotNumber[5] = findViewById(R.id.num5);
         b0 = findViewById(R.id.createLottery);
     }
 
